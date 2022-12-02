@@ -2,8 +2,8 @@ import React from 'react';
 import './style.css';
 
 import { Container, Row, Col, Form, Button } from 'bootstrap-4-react';
-
 import LayoutContainer from './layout/LayoutContainer';
+import ContactCard from './components/ContactCard';
 
 export default function App() {
   return (
@@ -15,6 +15,11 @@ export default function App() {
           </Col>
           <Col>
             <Button success>New Contact</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <ContactCard />
           </Col>
         </Row>
       </Container>
