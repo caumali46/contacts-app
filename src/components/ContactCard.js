@@ -7,6 +7,7 @@ import {
   Row,
   Button,
   ListGroup,
+  ButtonGroup,
 } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -25,45 +26,23 @@ const ContactCard = (props) => {
                 </Card.Text>
               </Col>
               <Col>
-                <Button danger outline className="mr-2">
-                  <FontAwesomeIcon icon={faTrashCan} className="mr-2" />
-                  Delete
-                </Button>
-                <Button warning>
-                  <FontAwesomeIcon icon={faPenToSquare} className="mr-2" />
-                  Edit
-                </Button>
+                <div className="d-flex justify-content-end">
+                  <ButtonGroup aria-label="Basic example">
+                    <Button default outline className="border-0 text-danger">
+                      <FontAwesomeIcon icon={faTrashCan} className="mr-2" />
+                      Delete
+                    </Button>
+                    <Button warning>
+                      <FontAwesomeIcon icon={faPenToSquare} className="mr-2" />
+                      Edit
+                    </Button>
+                  </ButtonGroup>
+                </div>
               </Col>
             </Row>
           </Container>
-        </ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+        </ListGroup.Item>{' '}
       </ListGroup>
-      {/* <Card.Body>
-        <Card.Text>
-          <Container>
-            <Row>
-              <Col>
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>
-                  This is some text <br /> within a card body.
-                </Card.Text>
-              </Col>
-              <Col>
-                <Button danger outline className="mr-2">
-                  <FontAwesomeIcon icon={faTrashCan} className="mr-2" />
-                  Delete
-                </Button>
-                <Button warning>
-                  <FontAwesomeIcon icon={faPenToSquare} className="mr-2" />
-                  Edit
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-        </Card.Text>
-      </Card.Body> */}
     </Card>
   );
 };
