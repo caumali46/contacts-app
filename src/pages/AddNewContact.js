@@ -122,7 +122,7 @@ export default function AddNewContact() {
                       value={fieldValues.fullName}
                       onChange={handleChange}
                     />
-                    <small class="text-danger">{errors.fullName}</small>
+                    <small className="text-danger">{errors.fullName}</small>
                   </Col>
                 </Row>
                 <Row className="pt-3">
@@ -142,7 +142,7 @@ export default function AddNewContact() {
                       value={fieldValues.email}
                       onChange={handleChange}
                     />
-                    <small class="text-danger">{errors.email}</small>
+                    <small className="text-danger">{errors.email}</small>
                   </Col>
                 </Row>
                 <Row className="pt-3">
@@ -162,7 +162,7 @@ export default function AddNewContact() {
                       value={fieldValues.telephone}
                       onChange={handleChange}
                     />
-                    <small class="text-danger">{errors.telephone}</small>
+                    <small className="text-danger">{errors.telephone}</small>
                   </Col>
                 </Row>
                 <Row>

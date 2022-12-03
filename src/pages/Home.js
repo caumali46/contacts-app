@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Form, Button, Alert } from 'bootstrap-4-react';
+import { Row, Col, Form, Button, Alert, Bootstrap } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -28,6 +28,7 @@ export default function Home() {
       localStorage.setItem('contact-list', JSON.stringify(deleteContacts));
       const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
       setAllContacts(existingContacts);
+      Bootstrap.modal('#deleteModal', { show: false });
     }
   };
   return (

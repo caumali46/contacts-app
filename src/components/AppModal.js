@@ -5,7 +5,7 @@ export default function AppModal(props) {
   const { handleDelete } = props;
   return (
     <div>
-      <Modal id="exampleModal" fade>
+      <Modal id="deleteModal" fade>
         <Modal.Dialog>
           <Modal.Content>
             <Modal.Header>
