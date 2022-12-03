@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Form, Button, Alert, Bootstrap } from 'bootstrap-4-react';
+import Bootstrap, { Row, Col, Form, Button, Alert } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,17 +20,23 @@ export default function Home() {
   }, []);
 
   const deleteContact = (contact) => {
-    console.info(allContexts);
     if (allContexts?.length) {
-      const deleteContacts = allContexts?.filter(
-        (prevContact) => prevContact.id !== contact?.id
+      const toDeleteContact = allContexts?.filter(
+        (prevContact) => prevContact.id != contact?.id
       );
-      localStorage.setItem('contact-list', JSON.stringify(deleteContacts));
+      localStorage.setItem('contact-list', JSON.stringify(toDeleteContact));
       const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
       setAllContacts(existingContacts);
-      Bootstrap.modal('#deleteModal', { show: false });
+      // Bootstrap.modal('#deleteModal', { show: false });
+      // document.getElementsByClassName('modal-backdrop').style.display = 'none';
+      // console.info(document.getElementsByClassName('modal-backdrop'));
     }
   };
+  // var myModal = new Bootstrap.Modal(document.getElementById('deleteModal'), {
+  //   show: false,
+  // });
+  // console.info(myModal);
+  // console.info(myModal.show());
   return (
     <ContactListContext.Provider value={contextData}>
       <React.Fragment>

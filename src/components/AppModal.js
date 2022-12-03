@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'bootstrap-4-react';
 
 export default function AppModal(props) {
-  const { handleDelete } = props;
+  const { handleDelete, modalRef } = props;
   return (
     <div>
       <Modal id="deleteModal" fade>
@@ -18,7 +18,7 @@ export default function AppModal(props) {
               Are you sure you want to delete this contact?
             </Modal.Body>
             <Modal.Footer>
-              <Button secondary data-dismiss="modal">
+              <Button secondary data-dismiss="modal" ref={modalRef}>
                 Cancel
               </Button>
               <Button danger onClick={handleDelete}>

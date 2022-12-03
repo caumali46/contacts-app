@@ -29,8 +29,10 @@ export default function AddNewContact() {
   const onSubmit = (e) => {
     e.preventDefault();
     if (isEmpty(errors)) {
-      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
-      const updatedValues = [...existingContacts, fieldValues];
+      const currentContacts = JSON.parse(localStorage.getItem('contact-list'));
+      const updatedValues = currentContacts?.length
+        ? [...currentContacts, fieldValues]
+        : [fieldValues];
       localStorage.setItem('contact-list', JSON.stringify(updatedValues));
       setFieldValues(defaultFields);
     }

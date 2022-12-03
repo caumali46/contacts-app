@@ -9,18 +9,20 @@ import {
   ListGroup,
   ButtonGroup,
 } from 'bootstrap-4-react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import AppModal from '../components/AppModal';
 
 const ContactCard = (props) => {
-  const { contacts, deleteContact } = props;
+  const { contacts, deleteContact, modalRef } = props;
+  console.info(props);
   return (
     <React.Fragment>
       <Card>
         <ListGroup flush>
           {contacts?.map((contact) => (
-            <>
+            <React.Fragment key={contact.id}>
               <ListGroup.Item>
                 <Container>
                   <Row>
@@ -39,7 +41,7 @@ const ContactCard = (props) => {
                             outline
                             className="border-0 text-danger"
                             data-toggle="modal"
-                            data-target="#exampleModal"
+                            data-target="#deleteModal"
                           >
                             <FontAwesomeIcon
                               icon={faTrashCan}
@@ -47,21 +49,26 @@ const ContactCard = (props) => {
                             />
                             Delete
                           </Button>
-                          <Button warning>
-                            <FontAwesomeIcon
-                              icon={faPenToSquare}
-                              className="mr-2"
-                            />
-                            Edit
-                          </Button>
+                          <Link to={`/edit-contact/:${contact.id}`}>
+                            <Button warning>
+                              <FontAwesomeIcon
+                                icon={faPenToSquare}
+                                className="mr-2"
+                              />
+                              Edit
+                            </Button>
+                          </Link>
                         </ButtonGroup>
                       </div>
                     </Col>
                   </Row>
                 </Container>
               </ListGroup.Item>{' '}
-              <AppModal handleDelete={() => deleteContact(contact)} />
-            </>
+              <AppModal
+                modalRef={modalRef}
+                handleDelete={() => deleteContact(contact)}
+              />
+            </React.Fragment>
           ))}
         </ListGroup>
       </Card>

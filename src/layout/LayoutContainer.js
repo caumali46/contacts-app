@@ -6,10 +6,12 @@ import { faIdBadge } from '@fortawesome/free-regular-svg-icons';
 const LayoutContainer = (props) => (
   <>
     <Navbar light bg="light">
-      <Navbar.Brand href="#">
-        <FontAwesomeIcon icon={faIdBadge} className="mr-2" />
-        Contacts
-      </Navbar.Brand>
+      <Container>
+        <Navbar.Brand href="#">
+          <FontAwesomeIcon icon={faIdBadge} className="mr-2" />
+          Contacts
+        </Navbar.Brand>
+      </Container>
     </Navbar>
     <Container className="mt-5">{props.children}</Container>
   </>
