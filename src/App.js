@@ -11,11 +11,11 @@ export default function App() {
   return (
     <LayoutContainer>
       <Container>
-        <Row>
+        <Row className="mb-4">
           <Col>
             <Form.Input placeholder="Search Contact" />
           </Col>
-          <Col>
+          <Col className="d-flex justify-content-end">
             <Button success>
               <FontAwesomeIcon icon={faPlus} className="mr-2" />
               New Contact
@@ -24,7 +24,6 @@ export default function App() {
         </Row>
         <Row>
           <Col>
-            <ContactCard />
             <ContactCard />
           </Col>
         </Row>
