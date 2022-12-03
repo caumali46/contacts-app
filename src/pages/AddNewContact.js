@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Container, Row, Col, Form, Card, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddNewContact() {
+  const fullNameRef = useRef();
+  const passWordRef = useRef();
+  const telephoneNameRef = useRef();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(fullNameRef.current.value);
+    console.log(passWordRef.current.value);
+    console.log(telephoneNameRef.current.value);
+  };
   return (
     <Card>
       <Container>
         <Row>
           <Col>
-            <Form>
+            <Form onSubmit={onSubmit}>
               <Form.Group className="required">
                 <Row className="pt-4">
                   <Form.LabelCol
@@ -21,7 +31,12 @@ export default function AddNewContact() {
                     Full Name
                   </Form.LabelCol>
                   <Col col="sm-10">
-                    <Form.Input type="name" placeholder="Name" id="fullName" />
+                    <Form.Input
+                      ref={fullNameRef}
+                      type="name"
+                      placeholder="Name"
+                      id="fullName"
+                    />
                   </Col>
                 </Row>
                 <Row className="pt-3">
@@ -34,6 +49,7 @@ export default function AddNewContact() {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
+                      ref={passWordRef}
                       type="password"
                       placeholder="Password"
                       id="inputPassword"
@@ -50,6 +66,7 @@ export default function AddNewContact() {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
+                      ref={telephoneNameRef}
                       type="name"
                       placeholder="Telephone"
                       id="telephone"
