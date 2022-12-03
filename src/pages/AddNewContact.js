@@ -11,9 +11,9 @@ export default function AddNewContact() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(fullNameRef.current.value);
-    console.log(passWordRef.current.value);
-    console.log(telephoneNameRef.current.value);
+    console.log(fullNameRef.current);
+    // console.log(passWordRef.current.value);
+    // console.log(telephoneNameRef.current.value);
   };
   return (
     <Card>
@@ -32,7 +32,7 @@ export default function AddNewContact() {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
-                      ref={fullNameRef}
+                      // ref={fullNameRef}
                       type="name"
                       placeholder="Name"
                       id="fullName"
