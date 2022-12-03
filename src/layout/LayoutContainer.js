@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, BImg } from 'bootstrap-4-react';
-import ContactIcon from '../assets/icons/contacts.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLight, faIdBadge } from '@fortawesome/free-light-svg-icons';
+import { faIdBadge } from '@fortawesome/free-regular-svg-icons';
 
 const LayoutContainer = (props) => (
   <>
@@ -16,7 +15,6 @@ const LayoutContainer = (props) => (
           align="top"
           mr="1"
         /> */}
-        <FontAwesomeIcon icon={'fa-solid fa-id-badge'} />
         <FontAwesomeIcon icon={faIdBadge} />
         Contacts
       </Navbar.Brand>

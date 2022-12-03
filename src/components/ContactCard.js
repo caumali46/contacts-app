@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Row, Col, Container, Row, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 const ContactCard = (props) => {
   return (
@@ -16,10 +17,14 @@ const ContactCard = (props) => {
                 </Card.Text>
               </Col>
               <Col>
-                <Button danger outline>
+                <Button danger outline className="mr-2">
+                  <FontAwesomeIcon icon={faTrashCan} className="mr-2" />
                   Delete
                 </Button>
-                <Button warning>Edit</Button>
+                <Button warning>
+                  <FontAwesomeIcon icon={faPenToSquare} className="mr-2" />
+                  Edit
+                </Button>
               </Col>
             </Row>
           </Container>
