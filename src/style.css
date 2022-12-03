@@ -6,3 +6,7 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
   font-family: 'Poppins', sans-serif;
 }
+.form-group.required .col-form-label:after {
+  content: '*';
+  color: red;
+}

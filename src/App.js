@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Container } from 'bootstrap-4-react';
 import LayoutContainer from './layout/LayoutContainer';
 import Home from './pages/Home';
 import AddNewContact from './pages/AddNewContact';
@@ -22,7 +23,9 @@ export default function App() {
   ]);
   return (
     <LayoutContainer>
-      <RouterProvider router={router} />
+      <Container>
+        <RouterProvider router={router} />
+      </Container>
     </LayoutContainer>
   );
 }

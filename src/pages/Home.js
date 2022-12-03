@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from 'bootstrap-4-react';
+import { Row, Col, Form, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,7 +9,7 @@ import '../style.css';
 
 export default function Home() {
   return (
-    <Container>
+    <React.Fragment>
       <Row className="mb-4">
         <Col>
           <Form.Input placeholder="Search Contact" />
@@ -28,6 +28,6 @@ export default function Home() {
           <ContactCard />
         </Col>
       </Row>
-    </Container>
+    </React.Fragment>
   );
 }
