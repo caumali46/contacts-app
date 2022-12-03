@@ -8,51 +8,90 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 export default function AddNewContact() {
   const defaultFields = {
     fullName: '',
-    password: '',
+    email: '',
     telephone: '',
   };
   const [fieldValues, setFieldValues] = useState(defaultFields);
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
-    handleValidation(e.target.value, e.target.name);
+    const { name, value } = e.target;
+    handleValidationOnChange(value, name);
     const id = uuid();
     setFieldValues((prev) => ({
       ...prev,
       id,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('contact-list', JSON.stringify(fieldValues));
-    setFieldValues(defaultFields);
-  };
-
-  const handleValidation = (inputValue, field) => {
-    // let Bool = false;
-    const isNull = inputValue === '' || inputValue === null;
-
-    // if (isNull) {
-    //   Bool = true;
+    // const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+    // const { email, telephone } = fieldValues;
+    // const sameEmail = existingContacts.filter(
+    //   (contact) => contact.email === email
+    // );
+    // const sameTelephone = existingContacts.filter(
+    //   (contact) => contact.telephone === telephone
+    // );
+    // if (sameEmail.length) {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     email: '* Contact with the same email address already exist.',
+    //   }));
+    // }
+    // if (sameTelephone.length) {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     telephone: '* Contact with the same telephone number already exist.',
+    //   }));
     // }
 
-    let Bool = isNull ? true : false;
+    // localStorage.setItem('contact-list', JSON.stringify([fieldValues]));
+    // setFieldValues(defaultFields);
+  };
+
+  const handleValidationOnChange = (inputValue, field) => {
+    let Bool = inputValue === '' || inputValue === null ? true : false;
     if (Bool) {
       setErrors((prev) => ({
         ...prev,
         [field]: '* This field cannot be empty',
       }));
     } else {
-      setErrors((prev) => {
-        const { [field]: remove, ...rest } = prev;
-        return rest;
-      });
+      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+      if (field === 'email') {
+        console.info(field, field === 'email');
+        const sameEmail = existingContacts.filter(
+          (contact) => contact.email === inputValue
+        );
+        if (sameEmail.length) {
+          setErrors((prev) => ({
+            ...prev,
+            email: '* Contact with the same email address already exist.',
+          }));
+        }
+      } else if (field === 'telephone') {
+        const sameTelephone = existingContacts.filter(
+          (contact) => contact.telephone === inputValue
+        );
+        if (sameTelephone.length) {
+          setErrors((prev) => ({
+            ...prev,
+            telephone:
+              '* Contact with the same telephone number already exist.',
+          }));
+        }
+      } else {
+        setErrors((prev) => {
+          const { [field]: remove, ...rest } = prev;
+          return rest;
+        });
+      }
     }
     return !Bool;
   };
 
-  console.log(errors);
   return (
     <Card>
       <Container>
@@ -84,20 +123,20 @@ export default function AddNewContact() {
                   <Form.LabelCol
                     col="sm-2"
                     className="text-right"
-                    htmlFor="inputPassword"
+                    htmlFor="inputEmail"
                   >
-                    Password
+                    Email
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      id="inputPassword"
-                      value={fieldValues.password}
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      id="inputEmail"
+                      value={fieldValues.email}
                       onChange={handleChange}
                     />
-                    <small class="text-danger">{errors.password}</small>
+                    <small class="text-danger">{errors.email}</small>
                   </Col>
                 </Row>
                 <Row className="pt-3">
