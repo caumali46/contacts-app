@@ -5,7 +5,7 @@ import { Container, Row, Col, Form, Button } from 'bootstrap-4-react';
 import LayoutContainer from './layout/LayoutContainer';
 import ContactCard from './components/ContactCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fasPlus } from '@fortawesome/free-regular-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function App() {
   return (
@@ -17,13 +17,14 @@ export default function App() {
           </Col>
           <Col>
             <Button success>
-              <FontAwesomeIcon icon={fasPlus} />
+              <FontAwesomeIcon icon={faPlus} className="mr-2" />
               New Contact
             </Button>
           </Col>
         </Row>
         <Row>
           <Col>
+            <ContactCard />
             <ContactCard />
           </Col>
         </Row>

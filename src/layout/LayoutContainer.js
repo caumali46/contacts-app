@@ -7,15 +7,7 @@ const LayoutContainer = (props) => (
   <>
     <Navbar light bg="light">
       <Navbar.Brand href="#">
-        {/* <BImg
-          src={ContactIcon}
-          width="30"
-          height="30"
-          display="inline-block"
-          align="top"
-          mr="1"
-        /> */}
-        <FontAwesomeIcon icon={faIdBadge} />
+        <FontAwesomeIcon icon={faIdBadge} className="mr-2" />
         Contacts
       </Navbar.Brand>
     </Navbar>
