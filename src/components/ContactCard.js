@@ -15,8 +15,7 @@ import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import AppModal from '../components/AppModal';
 
 const ContactCard = (props) => {
-  const { contacts, deleteContact, modalRef } = props;
-  console.info(props);
+  const { contacts, deleteContact } = props;
   return (
     <React.Fragment>
       <Card>
@@ -49,7 +48,7 @@ const ContactCard = (props) => {
                             />
                             Delete
                           </Button>
-                          <Link to={`/edit-contact/:${contact.id}`}>
+                          <Link to={`/edit-contact/${contact.id}`}>
                             <Button warning>
                               <FontAwesomeIcon
                                 icon={faPenToSquare}
@@ -64,10 +63,7 @@ const ContactCard = (props) => {
                   </Row>
                 </Container>
               </ListGroup.Item>{' '}
-              <AppModal
-                modalRef={modalRef}
-                handleDelete={() => deleteContact(contact)}
-              />
+              <AppModal handleDelete={() => deleteContact(contact)} />
             </React.Fragment>
           ))}
         </ListGroup>

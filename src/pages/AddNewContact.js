@@ -7,13 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function AddNewContact() {
+export default function AddNewContact(props) {
+  const { defaultValues, isEditPage = false } = props;
   const defaultFields = {
     fullName: '',
     email: '',
     telephone: '',
   };
-  const [fieldValues, setFieldValues] = useState(defaultFields);
+  const [fieldValues, setFieldValues] = useState(
+    defaultValues || defaultFields
+  );
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,12 +32,24 @@ export default function AddNewContact() {
   const onSubmit = (e) => {
     e.preventDefault();
     if (isEmpty(errors)) {
-      const currentContacts = JSON.parse(localStorage.getItem('contact-list'));
-      const updatedValues = currentContacts?.length
-        ? [...currentContacts, fieldValues]
-        : [fieldValues];
-      localStorage.setItem('contact-list', JSON.stringify(updatedValues));
-      setFieldValues(defaultFields);
+      if (isEditPage !== true) {
+        const currentContacts = JSON.parse(
+          localStorage.getItem('contact-list')
+        );
+        const updatedValues = currentContacts?.length
+          ? [...currentContacts, fieldValues]
+          : [fieldValues];
+        localStorage.setItem('contact-list', JSON.stringify(updatedValues));
+        setFieldValues(defaultFields);
+      } else {
+        // const currrentContacts = JSON.parse(
+        //   localStorage.getItem('contact-list')
+        // );
+        // const findContact = currrentContacts?.length
+        //   ? currrentContacts?.filter((contact) => contact.id == fieldValues?.id)
+        //   : [];
+        // console.info(findContact);
+      }
     }
   };
 
