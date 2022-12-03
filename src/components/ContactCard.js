@@ -1,21 +1,27 @@
 import React from 'react';
-import { Card, Row, Col } from 'bootstrap-4-react';
+import { Card, Row, Col, Container, Row, Button } from 'bootstrap-4-react';
 
 const ContactCard = (props) => {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Card title</Card.Title>
-        <Card.Subtitle mb="2" text="muted">
-          Card subtitle
-        </Card.Subtitle>
         <Card.Text>
-          <Row>
-            <Col>1 </Col>
-          </Row>
-          <Row>
-            <Col>3</Col>
-          </Row>
+          <Container>
+            <Row>
+              <Col>
+                <Card.Title>Card title</Card.Title>
+                <Card.Text>
+                  This is some text <br /> within a card body.
+                </Card.Text>
+              </Col>
+              <Col>
+                <Button danger outline>
+                  Delete
+                </Button>
+                <Button warning>Edit</Button>
+              </Col>
+            </Row>
+          </Container>
         </Card.Text>
       </Card.Body>
     </Card>
