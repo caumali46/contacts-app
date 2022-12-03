@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { trim, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import { Container, Row, Col, Form, Card, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
@@ -36,16 +37,22 @@ export default function AddNewContact() {
   };
 
   const handleValidationOnChange = (inputValue, field) => {
+    const emailErrMessage =
+      '* Contact with the same email address already exist.';
+    const telephoneErrorMessage =
+      '* Contact with the same telephone number already exist.';
+    const EmptyErrMessage = '* This field cannot be empty';
     let Bool = inputValue === '' || inputValue === null ? true : false;
 
     if (Bool) {
       setErrors((prev) => ({
         ...prev,
-        [field]: '* This field cannot be empty',
+        [field]: EmptyErrMessage,
       }));
     } else {
-      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
       let errors_ = errors;
+      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+
       if (existingContacts?.length) {
         if (field === 'email') {
           const sameEmail = existingContacts.filter(
@@ -54,7 +61,7 @@ export default function AddNewContact() {
           if (sameEmail.length) {
             errors_ = {
               ...errors_,
-              email: '* Contact with the same email address already exist.',
+              email: emailErrMessage,
             };
           } else {
             const { [field]: remove, ...rest } = errors;
@@ -65,12 +72,10 @@ export default function AddNewContact() {
           const sameTelephone = existingContacts.filter(
             (contact) => contact.telephone === inputValue
           );
-
           if (sameTelephone.length) {
             errors_ = {
               ...errors_,
-              telephone:
-                '* Contact with the same telephone number already exist.',
+              telephone: telephoneErrorMessage,
             };
           } else {
             const { [field]: remove, ...rest } = errors;
@@ -162,10 +167,16 @@ export default function AddNewContact() {
                 </Row>
                 <Row>
                   <Col col="sm-12" className="d-flex justify-content-end mt-3">
-                    <Button default type="button" className="text-danger mr-2">
-                      <FontAwesomeIcon icon={faXmark} className="mr-2" />
-                      Cancel
-                    </Button>
+                    <Link to="/">
+                      <Button
+                        default
+                        type="button"
+                        className="text-danger mr-2"
+                      >
+                        <FontAwesomeIcon icon={faXmark} className="mr-2" />
+                        Cancel
+                      </Button>
+                    </Link>
                     <Button success type="submit">
                       <FontAwesomeIcon icon={faFloppyDisk} className="mr-2" />
                       Save
