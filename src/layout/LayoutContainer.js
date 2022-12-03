@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Navbar, BImg } from 'bootstrap-4-react';
+import React from 'react';
+import { Navbar, Container } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIdBadge } from '@fortawesome/free-regular-svg-icons';
 
@@ -11,7 +11,7 @@ const LayoutContainer = (props) => (
         Contacts
       </Navbar.Brand>
     </Navbar>
-    <div class="container">{props.children}</div>
+    <Container className="mt-5">{props.children}</Container>
   </>
 );
 export default LayoutContainer;
