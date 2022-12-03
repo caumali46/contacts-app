@@ -1,7 +1,5 @@
 import React from 'react';
 import { Modal, Button } from 'bootstrap-4-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 export default function AppModal(props) {
   const { handleDelete } = props;

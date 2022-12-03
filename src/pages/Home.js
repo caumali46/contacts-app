@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Form, Button, Alert } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,10 +9,26 @@ import ContactListContext from '../layout/ContactListContext';
 import '../style.css';
 
 export default function Home() {
-  const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
-  console.info(existingContacts);
+  const [allContexts, setAllContacts] = useState([]);
   const contextData = {
-    contacts: existingContacts,
+    contacts: allContexts,
+  };
+
+  useEffect(() => {
+    const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+    setAllContacts(existingContacts);
+  }, []);
+
+  const deleteContact = (contact) => {
+    console.info(allContexts);
+    if (allContexts?.length) {
+      const deleteContacts = allContexts?.filter(
+        (prevContact) => prevContact.id !== contact?.id
+      );
+      localStorage.setItem('contact-list', JSON.stringify(deleteContacts));
+      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+      setAllContacts(existingContacts);
+    }
   };
   return (
     <ContactListContext.Provider value={contextData}>
@@ -32,10 +48,13 @@ export default function Home() {
         </Row>
         <Row>
           <Col>
-            {existingContacts?.length ? (
-              <ContactCard contacts={existingContacts} />
+            {allContexts?.length ? (
+              <ContactCard
+                contacts={allContexts}
+                deleteContact={deleteContact}
+              />
             ) : (
-              <Alert dark>Dark Alert</Alert>
+              <Alert info>You have no contacts currently.</Alert>
             )}
           </Col>
         </Row>
