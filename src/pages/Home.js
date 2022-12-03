@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,10 +15,12 @@ export default function Home() {
           <Form.Input placeholder="Search Contact" />
         </Col>
         <Col className="d-flex justify-content-end">
-          <Button success>
-            <FontAwesomeIcon icon={faPlus} className="mr-2" />
-            New Contact
-          </Button>
+          <Link to="/add-new-contact">
+            <Button success>
+              <FontAwesomeIcon icon={faPlus} className="mr-2" />
+              New Contact
+            </Button>
+          </Link>
         </Col>
       </Row>
       <Row>
