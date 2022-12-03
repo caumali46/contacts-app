@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import uuid from 'react-uuid';
+import { trim, isEmpty } from 'lodash';
 import { Container, Row, Col, Form, Card, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
@@ -26,33 +27,17 @@ export default function AddNewContact() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
-    // const { email, telephone } = fieldValues;
-    // const sameEmail = existingContacts.filter(
-    //   (contact) => contact.email === email
-    // );
-    // const sameTelephone = existingContacts.filter(
-    //   (contact) => contact.telephone === telephone
-    // );
-    // if (sameEmail.length) {
-    //   setErrors((prev) => ({
-    //     ...prev,
-    //     email: '* Contact with the same email address already exist.',
-    //   }));
-    // }
-    // if (sameTelephone.length) {
-    //   setErrors((prev) => ({
-    //     ...prev,
-    //     telephone: '* Contact with the same telephone number already exist.',
-    //   }));
-    // }
-
-    // localStorage.setItem('contact-list', JSON.stringify([fieldValues]));
-    // setFieldValues(defaultFields);
+    if (isEmpty(errors)) {
+      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+      const updatedValues = [...existingContacts, fieldValues];
+      localStorage.setItem('contact-list', JSON.stringify(updatedValues));
+      setFieldValues(defaultFields);
+    }
   };
 
   const handleValidationOnChange = (inputValue, field) => {
     let Bool = inputValue === '' || inputValue === null ? true : false;
+
     if (Bool) {
       setErrors((prev) => ({
         ...prev,
@@ -60,27 +45,43 @@ export default function AddNewContact() {
       }));
     } else {
       const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
-      if (field === 'email') {
-        console.info(field, field === 'email');
-        const sameEmail = existingContacts.filter(
-          (contact) => contact.email === inputValue
-        );
-        if (sameEmail.length) {
-          setErrors((prev) => ({
-            ...prev,
-            email: '* Contact with the same email address already exist.',
-          }));
-        }
-      } else if (field === 'telephone') {
-        const sameTelephone = existingContacts.filter(
-          (contact) => contact.telephone === inputValue
-        );
-        if (sameTelephone.length) {
-          setErrors((prev) => ({
-            ...prev,
-            telephone:
-              '* Contact with the same telephone number already exist.',
-          }));
+      let errors_ = errors;
+      if (existingContacts?.length) {
+        if (field === 'email') {
+          const sameEmail = existingContacts.filter(
+            (contact) => contact.email === inputValue
+          );
+          if (sameEmail.length) {
+            errors_ = {
+              ...errors_,
+              email: '* Contact with the same email address already exist.',
+            };
+          } else {
+            const { [field]: remove, ...rest } = errors;
+            errors_ = rest;
+          }
+          setErrors(errors_);
+        } else if (field === 'telephone') {
+          const sameTelephone = existingContacts.filter(
+            (contact) => contact.telephone === inputValue
+          );
+
+          if (sameTelephone.length) {
+            errors_ = {
+              ...errors_,
+              telephone:
+                '* Contact with the same telephone number already exist.',
+            };
+          } else {
+            const { [field]: remove, ...rest } = errors;
+            errors_ = rest;
+          }
+          setErrors(errors_);
+        } else {
+          setErrors((prev) => {
+            const { [field]: remove, ...rest } = prev;
+            return rest;
+          });
         }
       } else {
         setErrors((prev) => {
