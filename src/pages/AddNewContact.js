@@ -6,13 +6,15 @@ import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddNewContact() {
-  const [fieldValues, setFieldValues] = useState({
+  const defaultFields = {
     fullName: '',
     password: '',
     telephone: '',
-  });
-
+  };
+  const [fieldValues, setFieldValues] = useState(defaultFields);
+  const [errors, setErrors] = useState({});
   const handleChange = (e) => {
+    handleValidation(e.target.value, e.target.name);
     const id = uuid();
     setFieldValues((prev) => ({
       ...prev,
@@ -23,7 +25,34 @@ export default function AddNewContact() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem('contact-list', JSON.stringify(fieldValues));
+    setFieldValues(defaultFields);
   };
+
+  const handleValidation = (inputValue, field) => {
+    // let Bool = false;
+    const isNull = inputValue === '' || inputValue === null;
+
+    // if (isNull) {
+    //   Bool = true;
+    // }
+
+    let Bool = isNull ? true : false;
+    if (Bool) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: '* This field cannot be empty',
+      }));
+    } else {
+      setErrors((prev) => {
+        const { [field]: remove, ...rest } = prev;
+        return rest;
+      });
+    }
+    return !Bool;
+  };
+
+  console.log(errors);
   return (
     <Card>
       <Container>
@@ -45,8 +74,10 @@ export default function AddNewContact() {
                       name="fullName"
                       placeholder="Name"
                       id="fullName"
+                      value={fieldValues.fullName}
                       onChange={handleChange}
                     />
+                    <small class="text-danger">{errors.fullName}</small>
                   </Col>
                 </Row>
                 <Row className="pt-3">
@@ -63,8 +94,10 @@ export default function AddNewContact() {
                       name="password"
                       placeholder="Password"
                       id="inputPassword"
+                      value={fieldValues.password}
                       onChange={handleChange}
                     />
+                    <small class="text-danger">{errors.password}</small>
                   </Col>
                 </Row>
                 <Row className="pt-3">
@@ -81,8 +114,10 @@ export default function AddNewContact() {
                       name="telephone"
                       placeholder="Telephone"
                       id="telephone"
+                      value={fieldValues.telephone}
                       onChange={handleChange}
                     />
+                    <small class="text-danger">{errors.telephone}</small>
                   </Col>
                 </Row>
                 <Row>
