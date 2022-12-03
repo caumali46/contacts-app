@@ -1,5 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Form, Card, Button } from 'bootstrap-4-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddNewContact() {
   return (
@@ -9,7 +12,7 @@ export default function AddNewContact() {
           <Col>
             <Form>
               <Form.Group className="required">
-                <Row className="pt-3">
+                <Row className="pt-4">
                   <Form.LabelCol
                     col="sm-2"
                     className="text-right"
@@ -51,6 +54,18 @@ export default function AddNewContact() {
                       placeholder="Telephone"
                       id="telephone"
                     />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col col="sm-12" className="d-flex justify-content-end mt-3">
+                    <Button default type="button" className="text-danger mr-2">
+                      <FontAwesomeIcon icon={faXmark} className="mr-2" />
+                      Cancel
+                    </Button>
+                    <Button success type="submit">
+                      <FontAwesomeIcon icon={faFloppyDisk} className="mr-2" />
+                      Save
+                    </Button>
                   </Col>
                 </Row>
               </Form.Group>
