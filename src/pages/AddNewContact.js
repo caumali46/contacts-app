@@ -1,19 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
+import uuid from 'react-uuid';
 import { Container, Row, Col, Form, Card, Button } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddNewContact() {
-  const fullNameRef = useRef();
-  const passWordRef = useRef();
-  const telephoneNameRef = useRef();
+  const [fieldValues, setFieldValues] = useState({
+    fullName: '',
+    password: '',
+    telephone: '',
+  });
+
+  const handleChange = (e) => {
+    const id = uuid();
+    setFieldValues((prev) => ({
+      ...prev,
+      id,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(fullNameRef.current);
-    // console.log(passWordRef.current.value);
-    // console.log(telephoneNameRef.current.value);
   };
   return (
     <Card>
@@ -32,10 +41,11 @@ export default function AddNewContact() {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
-                      // ref={fullNameRef}
                       type="name"
+                      name="fullName"
                       placeholder="Name"
                       id="fullName"
+                      onChange={handleChange}
                     />
                   </Col>
                 </Row>
@@ -49,10 +59,11 @@ export default function AddNewContact() {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
-                      ref={passWordRef}
                       type="password"
+                      name="password"
                       placeholder="Password"
                       id="inputPassword"
+                      onChange={handleChange}
                     />
                   </Col>
                 </Row>
@@ -66,10 +77,11 @@ export default function AddNewContact() {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
-                      ref={telephoneNameRef}
                       type="name"
+                      name="telephone"
                       placeholder="Telephone"
                       id="telephone"
+                      onChange={handleChange}
                     />
                   </Col>
                 </Row>
