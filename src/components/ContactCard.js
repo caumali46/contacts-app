@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Container, Row, Button } from 'bootstrap-4-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ContactCard = (props) => {
   return (
