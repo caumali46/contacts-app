@@ -9,12 +9,13 @@ export default function EditContact(props) {
   const navigate = useNavigate();
   const { id } = params;
   const [errors, setErrors] = useState({});
+  const [prevValues, setPrevValues] = useState({});
   const [fieldValues, setFieldValues] = useState({
     fullName: '',
     email: '',
     telephone: '',
   });
-
+  
   const currrentContacts = JSON.parse(localStorage.getItem('contact-list'));
   const findContact = currrentContacts?.length
     ? currrentContacts?.filter((contact) => contact.id == id)
@@ -25,7 +26,8 @@ export default function EditContact(props) {
 
   useEffect(() => {
     if(findContact?.length) {
-      setFieldValues(findContact[0])
+      setPrevValues(findContact[0]);
+      setFieldValues(findContact[0]);
     }
   },[]);
   
@@ -35,8 +37,8 @@ export default function EditContact(props) {
       isEditPage: true,
       inputValue: value,
       field: name,
-      errors,
       setErrors,
+      prevValues
     });
     setFieldValues((prev) => ({
       ...prev,
