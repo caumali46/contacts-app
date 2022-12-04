@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import {
   Card,
   Row,
@@ -9,12 +12,10 @@ import {
   ListGroup,
   ButtonGroup,
 } from 'bootstrap-4-react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import HighlightSearch from '../components/HighlightSearch';
 
 const ContactCard = (props) => {
-  const { contacts, deleteContact } = props;
+  const { contacts, deleteContact, searchKeyWord } = props;
   return (
     <React.Fragment>
       <Card>
@@ -25,10 +26,22 @@ const ContactCard = (props) => {
                 <Container>
                   <Row>
                     <Col>
-                      <Card.Title>{contact?.fullName}</Card.Title>
+                      <Card.Title>
+                        <HighlightSearch 
+                          searchWords={[searchKeyWord]}
+                          textToHighlight={contact?.fullName}
+                        />
+                      </Card.Title>
                       <Card.Text>
-                        {contact?.telephone} <br />
-                        {contact?.email}
+                        <HighlightSearch 
+                          searchWords={[searchKeyWord]}
+                          textToHighlight={contact?.telephone}
+                        />
+                         <br />
+                        <HighlightSearch 
+                          searchWords={[searchKeyWord]}
+                          textToHighlight={contact?.email}
+                        />
                       </Card.Text>
                     </Col>
                     <Col>

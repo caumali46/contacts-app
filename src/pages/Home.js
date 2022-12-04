@@ -9,7 +9,7 @@ import '../style.css';
 
 export default function Home() {
   const [allContexts, setAllContacts] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState('');
   useEffect(() => {
     const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
     setAllContacts(existingContacts);
@@ -17,6 +17,7 @@ export default function Home() {
 
   const handleChange = (e) => {
     const searchQuery = e.target.value;
+    setSearchQuery(searchQuery);
     console.info(searchQuery);
   };
 
@@ -56,7 +57,11 @@ export default function Home() {
       <Row>
         <Col>
           {allContexts?.length ? (
-            <ContactCard contacts={allContexts} deleteContact={deleteContact} />
+            <ContactCard
+              contacts={allContexts}
+              deleteContact={deleteContact}
+              searchKeyWord={searchQuery}
+            />
           ) : (
             <Alert info>You have no contacts currently.</Alert>
           )}
