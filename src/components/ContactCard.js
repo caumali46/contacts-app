@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -15,6 +15,7 @@ import {
 import HighlightSearch from '../components/HighlightSearch';
 
 const ContactCard = (props) => {
+  const navigate = useNavigate();
   const { contacts, deleteContact, searchKeyWord } = props;
   return (
     <React.Fragment>
@@ -27,18 +28,18 @@ const ContactCard = (props) => {
                   <Row>
                     <Col>
                       <Card.Title>
-                        <HighlightSearch 
+                        <HighlightSearch
                           searchWords={[searchKeyWord]}
                           textToHighlight={contact?.fullName}
                         />
                       </Card.Title>
                       <Card.Text>
-                        <HighlightSearch 
+                        <HighlightSearch
                           searchWords={[searchKeyWord]}
                           textToHighlight={contact?.telephone}
                         />
-                         <br />
-                        <HighlightSearch 
+                        <br />
+                        <HighlightSearch
                           searchWords={[searchKeyWord]}
                           textToHighlight={contact?.email}
                         />
@@ -59,15 +60,18 @@ const ContactCard = (props) => {
                             />
                             Delete
                           </Button>
-                          <Link to={`/edit-contact/${contact.id}`}>
-                            <Button warning>
-                              <FontAwesomeIcon
-                                icon={faPenToSquare}
-                                className="mr-2"
-                              />
-                              Edit
-                            </Button>
-                          </Link>
+                          <Button
+                            warning
+                            onClick={() =>
+                              navigate(`/edit-contact/${contact.id}`)
+                            }
+                          >
+                            <FontAwesomeIcon
+                              icon={faPenToSquare}
+                              className="mr-2"
+                            />
+                            Edit
+                          </Button>
                         </ButtonGroup>
                       </div>
                     </Col>

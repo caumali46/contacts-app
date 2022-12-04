@@ -65,7 +65,7 @@ export default function ContactForm(props) {
                   </Form.LabelCol>
                   <Col col="sm-10">
                     <Form.Input
-                      type="name"
+                      type="number"
                       name="telephone"
                       placeholder="Telephone"
                       id="telephone"
