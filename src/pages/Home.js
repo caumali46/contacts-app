@@ -18,7 +18,17 @@ export default function Home() {
   const handleChange = (e) => {
     const searchQuery = e.target.value;
     setSearchQuery(searchQuery);
-    console.info(searchQuery);
+    const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+    const filterContact = existingContacts?.filter((contact) => {
+      const { fullName, email, telephone } = contact;
+      const lowerCase = searchQuery?.toLowerCase();
+      return (
+        fullName?.toLowerCase()?.includes(lowerCase) ||
+        email?.toLowerCase()?.includes(lowerCase) ||
+        telephone?.toLowerCase()?.includes(lowerCase)
+      );
+    });
+    setAllContacts(filterContact);
   };
 
   const deleteContact = (contact) => {
