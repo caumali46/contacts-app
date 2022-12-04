@@ -49,11 +49,14 @@ export default function AddNewContact(props) {
   };
 
   return (
-    <ContactForm
-      errors={errors}
-      fieldValues={fieldValues}
-      handleChange={handleChange}
-      onSubmit={onSubmit}
-    />
+    <>
+      <h5>Add New Contact</h5>
+      <ContactForm
+        errors={errors}
+        fieldValues={fieldValues}
+        handleChange={handleChange}
+        onSubmit={onSubmit}
+      />
+    </>
   );
 }

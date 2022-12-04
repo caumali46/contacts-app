@@ -3,7 +3,6 @@ import { findAll } from 'highlight-words-core';
 
 const HighlightSearch = (props) => {
   const { searchWords, textToHighlight } = props;
-  console.info(searchWords);
 
   const chunks = findAll({
     searchWords,

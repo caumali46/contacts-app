@@ -3,15 +3,24 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Form, Button, Alert } from 'bootstrap-4-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import ContactCard from '../components/ContactCard';
 import '../style.css';
 
+const emptyContacts = 'You have no contacts currently.';
+const noResultsFound = 'No results found!';
+
 export default function Home() {
   const [allContexts, setAllContacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [warningMessage, setWarningMessage] = useState('');
+
   useEffect(() => {
     const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
+    if (existingContacts?.length < 1) {
+      setWarningMessage(emptyContacts);
+    }
     setAllContacts(existingContacts);
   }, []);
 
@@ -28,6 +37,9 @@ export default function Home() {
         telephone?.toLowerCase()?.includes(lowerCase)
       );
     });
+    if (filterContact?.length < 1) {
+      setWarningMessage(noResultsFound);
+    }
     setAllContacts(filterContact);
   };
 
@@ -51,6 +63,7 @@ export default function Home() {
 
   return (
     <React.Fragment>
+      <h5>All Contacts</h5>
       <Row className="mb-4">
         <Col>
           <Form.Input placeholder="Search Contact" onChange={handleChange} />
@@ -73,7 +86,10 @@ export default function Home() {
               searchKeyWord={searchQuery}
             />
           ) : (
-            <Alert info>You have no contacts currently.</Alert>
+            <Alert info>
+              <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
+              {warningMessage}
+            </Alert>
           )}
         </Col>
       </Row>

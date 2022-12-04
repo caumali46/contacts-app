@@ -15,7 +15,7 @@ export default function EditContact(props) {
     email: '',
     telephone: '',
   });
-  
+
   const currrentContacts = JSON.parse(localStorage.getItem('contact-list'));
   const findContact = currrentContacts?.length
     ? currrentContacts?.filter((contact) => contact.id == id)
@@ -25,12 +25,12 @@ export default function EditContact(props) {
   }
 
   useEffect(() => {
-    if(findContact?.length) {
+    if (findContact?.length) {
       setPrevValues(findContact[0]);
       setFieldValues(findContact[0]);
     }
-  },[]);
-  
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     handleValidationOnChange({
@@ -38,7 +38,7 @@ export default function EditContact(props) {
       inputValue: value,
       field: name,
       setErrors,
-      prevValues
+      prevValues,
     });
     setFieldValues((prev) => ({
       ...prev,
@@ -48,10 +48,8 @@ export default function EditContact(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (isEmpty(errors)) { 
-      const currrentContacts = JSON.parse(
-        localStorage.getItem('contact-list')
-      );
+    if (isEmpty(errors)) {
+      const currrentContacts = JSON.parse(localStorage.getItem('contact-list'));
       const findContact = currrentContacts?.length
         ? currrentContacts?.filter((contact) => contact.id !== fieldValues?.id)
         : [];
@@ -62,11 +60,16 @@ export default function EditContact(props) {
   };
 
   return (
-    <ContactForm
-      errors={errors}
-      fieldValues={fieldValues}
-      handleChange={handleChange}
-      onSubmit={onSubmit}
-    />
+    <>
+      <h5>
+        Edit Contact: <b>{fieldValues?.fullName}</b>
+      </h5>
+      <ContactForm
+        errors={errors}
+        fieldValues={fieldValues}
+        handleChange={handleChange}
+        onSubmit={onSubmit}
+      />
+    </>
   );
 }
