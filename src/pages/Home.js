@@ -14,7 +14,7 @@ const noResultsFound = 'No results found!';
 export default function Home() {
   const [allContexts, setAllContacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [warningMessage, setWarningMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState(emptyContacts);
 
   useEffect(() => {
     const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
