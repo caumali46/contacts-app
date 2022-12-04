@@ -12,7 +12,6 @@ import {
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import AppModal from '../components/AppModal';
 
 const ContactCard = (props) => {
   const { contacts, deleteContact } = props;
@@ -39,8 +38,7 @@ const ContactCard = (props) => {
                             default
                             outline
                             className="border-0 text-danger"
-                            data-toggle="modal"
-                            data-target="#deleteModal"
+                            onClick={() => deleteContact(contact)}
                           >
                             <FontAwesomeIcon
                               icon={faTrashCan}
@@ -63,7 +61,6 @@ const ContactCard = (props) => {
                   </Row>
                 </Container>
               </ListGroup.Item>{' '}
-              <AppModal handleDelete={() => deleteContact(contact)} />
             </React.Fragment>
           ))}
         </ListGroup>

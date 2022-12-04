@@ -20,16 +20,23 @@ export default function Home() {
   }, []);
 
   const deleteContact = (contact) => {
-    if (allContexts?.length) {
-      const toDeleteContact = allContexts?.filter(
-        (prevContact) => prevContact.id != contact?.id
-      );
-      localStorage.setItem('contact-list', JSON.stringify(toDeleteContact));
-      const existingContacts = JSON.parse(localStorage.getItem('contact-list'));
-      setAllContacts(existingContacts);
-      // Bootstrap.modal('#deleteModal', { show: false });
-      // document.getElementsByClassName('modal-backdrop').style.display = 'none';
-      // console.info(document.getElementsByClassName('modal-backdrop'));
+    const confirm = window.confirm(
+      `Are you sure you want to delete the contact: ${contact?.fullName}`
+    );
+    if (confirm) {
+      if (allContexts?.length) {
+        const toDeleteContact = allContexts?.filter(
+          (prevContact) => prevContact.id != contact?.id
+        );
+        localStorage.setItem('contact-list', JSON.stringify(toDeleteContact));
+        const existingContacts = JSON.parse(
+          localStorage.getItem('contact-list')
+        );
+        setAllContacts(existingContacts);
+        // Bootstrap.modal('#deleteModal', { show: false });
+        // document.getElementsByClassName('modal-backdrop').style.display = 'none';
+        // console.info(document.getElementsByClassName('modal-backdrop'));
+      }
     }
   };
   // var myModal = new Bootstrap.Modal(document.getElementById('deleteModal'), {
